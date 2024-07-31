@@ -31,3 +31,6 @@ xformers
 bitsandbytes
 accelerate
 transformers
+
+Drive link of bin flie:
+-> https://drive.google.com/file/d/14FypECy_au1jgKlGZBBOtIGMA7EVd__N/view?usp=drive_link
