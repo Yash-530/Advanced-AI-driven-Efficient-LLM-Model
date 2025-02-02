@@ -1,36 +1,93 @@
-Introduction to LLMs
-Large Language Models (LLMs) like GPT-3 and BERT are advanced AI models designed to process and generate human-like text. They are trained on extensive datasets, learning language patterns and nuances, and are utilized in tasks such as language translation, information retrieval, and conversational agents.
+# Medical Chatbot using Retrieval Augmented Generation (RAG)
 
-The Bloke/Llama-2-7B-Chat-GGML
-The Bloke/Llama-2-7B-Chat-GGML is a cutting-edge conversational AI model built on the LlamaIndex and Mistral 7B, tailored for chat-oriented tasks. It excels in generating coherent and contextually relevant responses, enhancing user interaction with AI systems.
+## Introduction
+This project implements a **Medical Chatbot** using **Retrieval Augmented Generation (RAG)**. It leverages **TheBloke/Llama-2-7B-Chat-GGML** model with **FAISS** for efficient information retrieval and LangChain for orchestration.
 
-Retrieval Augmented Generation (RAG)
-RAG combines information retrieval from external knowledge sources with LLMs to improve answer accuracy and reduce hallucination. The RAG system involves two main components: indexing and retrieval & generation.
+## Features
+- **Conversational AI** using Llama-2-7B-Chat-GGML
+- **Document-based Question Answering** with FAISS vector search
+- **Retrieval Augmented Generation (RAG)** for accurate and context-aware responses
+- **Chainlit UI integration** for chatbot interaction
 
-Indexing
-Data is loaded, split into smaller chunks, embedded using models like Sentence-BERT, and stored in a vector database such as FAISS. This process enhances efficient information retrieval.
+## Technologies Used
+- **LangChain** for orchestration
+- **FAISS** for vector storage
+- **Hugging Face Embeddings** for document representation
+- **CTransformers** for running the LLM
+- **Chainlit** for chatbot interface
+- **Sentence Transformers** for efficient embeddings
 
-Retrieval & Generation
-User queries are embedded, matched with stored chunks in the vector database, and relevant contexts are retrieved. These contexts, along with the user query, are input to the LLM to generate informed responses.
+## Installation
+### Prerequisites
+Ensure you have the following installed:
+- Python 3.8+
+- pip
+- Virtual environment (optional but recommended)
 
-Implementation with The Bloke/Llama-2-7B-Chat-GGML
-We leverage the Bloke/Llama-2-7B-Chat-GGML model for RAG, facilitating meaningful and accurate responses to user queries by retrieving information from diverse sources like PDFs and links. The integration of LangChain into the RAG workflow ensures efficient query handling, information retrieval, and response generation.
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd <repo-name>
+   ```
+2. Create and activate a virtual environment (optional):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Download the Llama-2-7B-Chat-GGML model:
+   - Model binary: [Google Drive Link](https://drive.google.com/file/d/14FypECy_au1jgKlGZBBOtIGMA7EVd__N/view?usp=drive_link)
+   - Place the model in the appropriate directory for usage.
 
-System Setup
-Environment Setup: Download necessary binaries and set up a Python environment with required libraries.
-Model Loading: Use Hugging Face Transformers to load the Bloke/Llama-2-7B-Chat-GGML model.
-Indexing: Use document loaders and text splitters to create vector databases with FAISS.
-Retrieval & Generation: Retrieve relevant contexts from the vector database and generate responses using the LLM.
-Dependencies
-langchain
-pinecone-client
-sentence_transformers
-pdf2image
-pypdf
-xformers
-bitsandbytes
-accelerate
-transformers
+## Usage
+### Running the Chatbot
+Start the chatbot using Chainlit:
+```bash
+chainlit run chatbot.py
+```
 
-Drive link of bin flie:
--> https://drive.google.com/file/d/14FypECy_au1jgKlGZBBOtIGMA7EVd__N/view?usp=drive_link
+### Querying the Bot
+Once the chatbot starts, you can ask medical-related queries. The bot retrieves information from stored documents and generates accurate responses.
+
+## Project Components
+### 1. **Document Processing**
+- Loads PDFs using `PyPDFLoader`.
+- Extracts and embeds text using `HuggingFaceEmbeddings`.
+- Stores processed embeddings in a **FAISS vector store**.
+
+### 2. **Retrieval Augmented Generation (RAG)**
+- Retrieves relevant document chunks based on user queries.
+- Passes retrieved context to the **Llama-2-7B-Chat-GGML** model.
+- Generates accurate and context-aware responses.
+
+### 3. **Chatbot Interface**
+- Uses **Chainlit** to create an interactive chatbot.
+- Supports real-time responses with document citations.
+
+## Code Structure
+```
+├── chatbot.py              # Main chatbot script
+├── requirements.txt        # List of dependencies
+├── vectorstore/            # Directory for FAISS vector storage
+├── models/                 # Directory for storing Llama model files
+└── README.md               # Project documentation
+```
+
+## Dependencies
+Install the following dependencies:
+```bash
+pip install langchain chainlit sentence-transformers faiss-cpu ctransformers pdf2image pypdf xformers bitsandbytes accelerate transformers
+```
+
+## Future Enhancements
+- **Expand Knowledge Base**: Integrate multiple document sources.
+- **Enhance UI**: Improve Chainlit interface with more features.
+- **Deploy as an API**: Create a REST API for broader accessibility.
+
+## License
+This project is open-source under the **MIT License**.
+
